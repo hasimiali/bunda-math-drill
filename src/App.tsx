@@ -49,6 +49,7 @@ function App() {
   const [exitOpen, setExitOpen] = useState(false)
   const runId = useRef(0)
   const roundStarted = useRef(0)
+  const voiceSelectedByUser = useRef(false)
   const selectedVoice = voices.find((voice) => voice.name === voiceName) ?? voices[0]
   const speechSupported = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window
   const question = questions[round]
@@ -58,7 +59,9 @@ function App() {
     const update = () => {
       const available = getIndonesianVoices()
       setVoices(available)
-      setVoiceName((current) => current || available[0]?.name || '')
+      setVoiceName((current) => voiceSelectedByUser.current && available.some((voice) => voice.name === current)
+        ? current
+        : available[0]?.name || '')
     }
     update()
     window.speechSynthesis.addEventListener('voiceschanged', update)
@@ -183,7 +186,7 @@ function App() {
     questions, source, examplePack, setExamplePack, feedbackMode, setFeedbackMode,
     gameMode, setGameMode,
     voiceEnabled, setVoiceEnabled, speechRate, setSpeechRate, gap, setGap,
-    voices, voiceName, setVoiceName, speechSupported, notice, fileError,
+    voices, voiceName, setVoiceName: (name: string) => { voiceSelectedByUser.current = true; setVoiceName(name) }, speechSupported, notice, fileError,
     handleFile, useExamplePack, startGame,
   }} />
   else if (screen === 'results') content = <ResultsScreen results={results} source={source} onAgain={startGame} onMenu={() => setScreen('setup')} />

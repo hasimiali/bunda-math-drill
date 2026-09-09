@@ -82,9 +82,11 @@ jumlah soal sepenuhnya mengikuti paket contoh atau file CSV/Excel yang dipilih.
 
 ## Suara browser
 
-Bunda Math memilih suara dengan locale `id-ID` atau `id` bila tersedia. Daftar
-suara bergantung pada browser dan sistem operasi. Microsoft Edge di Windows dan
-Chrome di Android biasanya menyediakan suara Indonesia berkualitas baik.
+Bunda Math memprioritaskan **Google Bahasa Indonesia** sebagai suara default.
+Jika suara Google tidak tersedia, aplikasi memilih suara dengan locale `id-ID`
+atau `id`. Daftar suara bergantung pada browser dan sistem operasi; suara Google
+umumnya tersedia di Google Chrome, sedangkan browser lain memakai suara Indonesia
+yang disediakan perangkat.
 
 Jika suara Indonesia tidak terpasang, pengguna dapat memilih suara lain yang
 disediakan perangkat atau menonaktifkan suara. Mode visual tidak membutuhkan

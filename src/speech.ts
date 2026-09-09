@@ -4,7 +4,17 @@ export function getIndonesianVoices(): SpeechSynthesisVoice[] {
   if (!('speechSynthesis' in window)) return []
   const voices = window.speechSynthesis.getVoices()
   const indonesian = voices.filter((voice) => voice.lang.toLowerCase().startsWith('id'))
-  return indonesian.length ? indonesian : voices
+  const available = indonesian.length ? indonesian : voices
+  return [...available].sort((left, right) => voicePriority(left) - voicePriority(right))
+}
+
+function voicePriority(voice: SpeechSynthesisVoice): number {
+  const name = voice.name.toLowerCase()
+  const language = voice.lang.toLowerCase()
+  if (name.includes('google') && (name.includes('bahasa indonesia') || language.startsWith('id'))) return 0
+  if (language === 'id-id') return 1
+  if (language.startsWith('id')) return 2
+  return voice.default ? 3 : 4
 }
 
 export function speak(text: string, voice: SpeechSynthesisVoice | undefined, rate: number): Promise<void> {
