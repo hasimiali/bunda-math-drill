@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+*.exe
+*.mp3
+.DS_Store
+coverage/
+*.log
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
